@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class MechControl : MonoBehaviour
 {
     [SerializeField] InputAction moveAction;
+    
 
     void Start()
     {
@@ -13,6 +14,11 @@ public class MechControl : MonoBehaviour
     }
 
     void Update()
+    {
+        
+    }
+
+    private void MechMovement()
     {
         
     }
