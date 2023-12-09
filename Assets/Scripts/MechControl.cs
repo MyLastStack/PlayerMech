@@ -5,9 +5,14 @@ using UnityEngine.InputSystem;
 
 public class MechControl : MonoBehaviour
 {
+    [Header("CharacterAction")]
     public InputAction baseMoveAction;
     [SerializeField] Vector2 baseMoveInput;
     [SerializeField] float baseMoveSpeed, baseRotateSpeed;
+
+    [Header("AudioPlayer")]
+    [SerializeField] AudioSource wheelTracks;
+    public float mag;
 
     Rigidbody rb;
 
@@ -19,6 +24,7 @@ public class MechControl : MonoBehaviour
     void Update()
     {
         MechMovement();
+        mag = rb.velocity.magnitude;
     }
 
     private void FixedUpdate()
@@ -30,6 +36,18 @@ public class MechControl : MonoBehaviour
     private void MechMovement()
     {
         baseMoveInput = baseMoveAction.ReadValue<Vector2>();
+
+        if (rb.velocity.magnitude > 0.02)
+        {
+            if (!wheelTracks.isPlaying)
+            {
+                wheelTracks.Play();
+            }
+        }
+        else
+        {
+            wheelTracks.Pause();
+        }
     }
 
     private void OnEnable()
