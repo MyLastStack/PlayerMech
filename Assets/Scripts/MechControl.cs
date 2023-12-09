@@ -29,7 +29,6 @@ public class MechControl : MonoBehaviour
     public currentSelect selectedWeapon = currentSelect.RArm;
 
     [Header("Interactions")]
-    public InputAction interactAction;
     public bool interacting;
 
     Rigidbody rb;
@@ -42,12 +41,12 @@ public class MechControl : MonoBehaviour
 
     void Update()
     {
+        MechMovement();
         if (interacting)
         {
         }
         else
         {
-            MechMovement();
             WeaponSelecting();
         }
     }
@@ -99,7 +98,7 @@ public class MechControl : MonoBehaviour
     {
         if (other.tag == "Pickup")
         {
-            interacting = true;
+            
         }
     }
 
@@ -107,12 +106,10 @@ public class MechControl : MonoBehaviour
     private void OnEnable()
     {
         baseMoveAction.Enable();
-        interactAction.Enable();
     }
     private void OnDisable()
     {
         baseMoveAction.Disable();
-        interactAction.Disable();
     }
     #endregion
 }
