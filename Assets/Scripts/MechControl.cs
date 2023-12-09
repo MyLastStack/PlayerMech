@@ -8,7 +8,6 @@ public class MechControl : MonoBehaviour
 {
     [Header("Character Action")]
     public InputAction baseMoveAction;
-    public InputAction weaponSelectAction;
     [SerializeField] Vector2 baseMoveInput;
     [SerializeField] float baseMoveSpeed, baseRotateSpeed;
 
@@ -29,17 +28,25 @@ public class MechControl : MonoBehaviour
     }
     public currentSelect selectedWeapon = currentSelect.RArm;
 
+    [Header("Interactions")]
+    public InputAction interactAction;
+    public bool interacting;
+
     Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        interacting = false;
     }
 
     void Update()
     {
-        MechMovement();
-        WeaponSelecting();
+        if (!interacting)
+        {
+            MechMovement();
+            WeaponSelecting();
+        }
     }
 
     private void FixedUpdate()
@@ -88,11 +95,11 @@ public class MechControl : MonoBehaviour
     private void OnEnable()
     {
         baseMoveAction.Enable();
-        weaponSelectAction.Enable();
+        interactAction.Enable();
     }
     private void OnDisable()
     {
         baseMoveAction.Disable();
-        weaponSelectAction.Enable();
+        interactAction.Disable();
     }
 }
