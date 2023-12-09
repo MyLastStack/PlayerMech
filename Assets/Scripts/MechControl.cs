@@ -42,7 +42,10 @@ public class MechControl : MonoBehaviour
 
     void Update()
     {
-        if (!interacting)
+        if (interacting)
+        {
+        }
+        else
         {
             MechMovement();
             WeaponSelecting();
@@ -92,6 +95,15 @@ public class MechControl : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Pickup")
+        {
+            interacting = true;
+        }
+    }
+
+    #region InputAction Enables and Disables
     private void OnEnable()
     {
         baseMoveAction.Enable();
@@ -102,4 +114,5 @@ public class MechControl : MonoBehaviour
         baseMoveAction.Disable();
         interactAction.Disable();
     }
+    #endregion
 }

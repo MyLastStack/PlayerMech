@@ -2949,7 +2949,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3016,15 +3016,6 @@ MonoBehaviour:
       m_Action: Base Move
       m_Flags: 8
     m_Flags: 0
-  weaponSelectAction:
-    m_Name: Weapon Select
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b5036685-d7b2-4063-88c2-9790194bbe9e
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
   baseMoveInput: {x: 0, y: 0}
   baseMoveSpeed: 20
   baseRotateSpeed: 20
@@ -3034,6 +3025,16 @@ MonoBehaviour:
   LArmUsed: 0
   RArmUsed: 0
   selectedWeapon: 0
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 98f4c8ee-6421-48a9-ac5f-4fd6a5babb2e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  interacting: 0
 --- !u!54 &1481645970
 Rigidbody:
   m_ObjectHideFlags: 0
