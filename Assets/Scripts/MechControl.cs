@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MechControl : MonoBehaviour
 {
-    [Header("CharacterAction")]
+    [Header("Character Action")]
     public InputAction baseMoveAction;
+    public InputAction weaponSelectAction;
     [SerializeField] Vector2 baseMoveInput;
     [SerializeField] float baseMoveSpeed, baseRotateSpeed;
 
-    [Header("AudioPlayer")]
+    [Header("Audio Player")]
     [SerializeField] AudioSource wheelTracks;
-    public float mag;
+
+    [Header("Weapon Selection")]
+    [SerializeField] bool LShoulderUsed;
+    [SerializeField] bool RShoulderUsed;
+    [SerializeField] bool LArmUsed;
+    [SerializeField] bool RArmUsed;
+    public enum currentSelect
+    { 
+        LShoulder,
+        RShoulder,
+        LArm,
+        RArm
+    }
+    public currentSelect selectedWeapon = currentSelect.RArm;
 
     Rigidbody rb;
 
@@ -24,7 +39,7 @@ public class MechControl : MonoBehaviour
     void Update()
     {
         MechMovement();
-        mag = rb.velocity.magnitude;
+        WeaponSelecting();
     }
 
     private void FixedUpdate()
@@ -50,12 +65,34 @@ public class MechControl : MonoBehaviour
         }
     }
 
+    private void WeaponSelecting()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            selectedWeapon = currentSelect.LShoulder;
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            selectedWeapon = currentSelect.RShoulder;
+        }
+        else if (Input.GetKeyDown("3"))
+        {
+            selectedWeapon = currentSelect.LArm;
+        }
+        else if (Input.GetKeyDown("4"))
+        {
+            selectedWeapon = currentSelect.RArm;
+        }
+    }
+
     private void OnEnable()
     {
         baseMoveAction.Enable();
+        weaponSelectAction.Enable();
     }
     private void OnDisable()
     {
         baseMoveAction.Disable();
+        weaponSelectAction.Enable();
     }
 }
