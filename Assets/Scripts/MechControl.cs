@@ -85,7 +85,7 @@ public class MechControl : MonoBehaviour
             selectedWeapon = currentSelect.RArm;
         }
 
-        if (firingAction.triggered)
+        if (Input.GetButton("Fire1"))
         {
             switch (selectedWeapon)
             {
