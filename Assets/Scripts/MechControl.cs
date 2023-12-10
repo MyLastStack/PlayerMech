@@ -17,6 +17,10 @@ public class MechControl : MonoBehaviour
     [Header("Weapons")]
     public InputAction firingAction;
     public Camera fpsCam;
+    [SerializeField] ParticleSystem mgMuzzleFlash;
+    public GameObject impactEffect;
+    private float nextTimeToFire = 0f;
+    private float fireRate = 15f;
     public enum currentSelect
     { 
         LShoulder,
@@ -92,6 +96,11 @@ public class MechControl : MonoBehaviour
                 case currentSelect.LArm:
                     break;
                 case currentSelect.RArm:
+                    if (Time.time >= nextTimeToFire)
+                    {
+                        nextTimeToFire = Time.time + 1 / fireRate;
+                        MGShoot();
+                    }
                     break;
                 default:
                     break;
@@ -101,8 +110,26 @@ public class MechControl : MonoBehaviour
 
     private void MGShoot()
     {
-        RaycastHit hit;
+        mgMuzzleFlash.Play();
+        float dmg = 10f;
 
+        RaycastHit hit;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 50f))
+        {
+            DamageableScript target = hit.transform.GetComponent<DamageableScript>();
+            if (target != null)
+            {
+                target.TakeDamage(dmg);
+            }
+
+            if (hit.rigidbody != null)
+            {
+                hit.rigidbody.AddForce(-hit.normal * 30);
+            }
+
+            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGO, 1f);
+        }
     }
 
     #region InputAction Enables and Disables
