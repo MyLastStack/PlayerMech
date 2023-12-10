@@ -3556,6 +3556,7 @@ MonoBehaviour:
     m_Flags: 0
   fpsCam: {fileID: 963194227}
   mgMuzzleFlash: {fileID: 1390965646}
+  impactEffect: {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
   selectedWeapon: 0
 --- !u!54 &1481645970
 Rigidbody:
