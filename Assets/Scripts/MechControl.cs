@@ -28,27 +28,17 @@ public class MechControl : MonoBehaviour
     }
     public currentSelect selectedWeapon = currentSelect.RArm;
 
-    [Header("Interactions")]
-    public bool interacting;
-
     Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        interacting = false;
     }
 
     void Update()
     {
         MechMovement();
-        if (interacting)
-        {
-        }
-        else
-        {
-            WeaponSelecting();
-        }
+        WeaponSelecting();
     }
 
     private void FixedUpdate()
@@ -91,14 +81,6 @@ public class MechControl : MonoBehaviour
         else if (Input.GetKeyDown("4"))
         {
             selectedWeapon = currentSelect.RArm;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Pickup")
-        {
-            
         }
     }
 
