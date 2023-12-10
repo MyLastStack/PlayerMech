@@ -17,6 +17,8 @@ public class KablooeyScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        rb.velocity = transform.forward * 1000f;
+
         Invoke("ForcedExplosion", 10f);
     }
 
@@ -27,11 +29,6 @@ public class KablooeyScript : MonoBehaviour
             GameObject impactGO = Instantiate(explosionEffect, lastHitPlaced, Quaternion.LookRotation(lastHitPlaced));
             Destroy(gameObject, 2f);
         }
-    }
-
-    public void Fire(float speed, Vector3 direction)
-    {
-        rb.velocity = direction * speed;
     }
 
     void ForcedExplosion()

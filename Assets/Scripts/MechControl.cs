@@ -25,7 +25,7 @@ public class MechControl : MonoBehaviour
     // Missile
     public Transform lSide;
     public Transform rSide;
-    private float missileProjectileSpeed = 100f;
+    private float missileProjectileSpeed = 1000f;
     private float missileNextTimeToFire = 0f;
     private float missileFireRate = 3f;
     [SerializeField] private KablooeyScript missile;
@@ -168,7 +168,6 @@ public class MechControl : MonoBehaviour
         var position = spawner.position + spawner.forward;
         var rotation = spawner.rotation;
         KablooeyScript projectile = Instantiate(missile, position, rotation);
-        projectile.Fire(missileProjectileSpeed, spawner.forward);
     }
 
     #region InputAction Enables and Disables
