@@ -14,7 +14,8 @@ public class MechControl : MonoBehaviour
     [Header("Audio Player")]
     [SerializeField] AudioSource wheelTracks;
 
-    [Header("Weapon Selection")]
+    [Header("Weapons")]
+    public InputAction firingAction;
     public enum currentSelect
     { 
         LShoulder,
@@ -84,10 +85,12 @@ public class MechControl : MonoBehaviour
     private void OnEnable()
     {
         baseMoveAction.Enable();
+        firingAction.Enable();
     }
     private void OnDisable()
     {
         baseMoveAction.Disable();
+        firingAction.Disable();
     }
     #endregion
 }
