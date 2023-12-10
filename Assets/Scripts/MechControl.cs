@@ -29,6 +29,8 @@ public class MechControl : MonoBehaviour
     private float missileNextTimeToFire = 0f;
     private float missileFireRate = 3f;
     [SerializeField] private KablooeyScript missile;
+    [SerializeField] ParticleSystem lMissileMuzzleFlash;
+    [SerializeField] ParticleSystem rMissileMuzzleFlash;
 
     public enum currentSelect
     { 
@@ -159,10 +161,12 @@ public class MechControl : MonoBehaviour
         if (side == 1)
         {
             spawner = lSide.transform;
+            lMissileMuzzleFlash.Play();
         }
         else if (side == 2)
         {
             spawner = rSide.transform;
+            rMissileMuzzleFlash.Play();
         }
 
         var position = spawner.position + spawner.forward;
