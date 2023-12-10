@@ -50,7 +50,7 @@ public class KablooeyScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         DamageableScript target = other.GetComponent<DamageableScript>();
-        if (target != null)
+        if (target != null && explode)
         {
             target.TakeDamage(dmg);
         }

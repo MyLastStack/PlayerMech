@@ -31,7 +31,8 @@ public class MechControl : MonoBehaviour
     [SerializeField] private KablooeyScript missile;
     [SerializeField] ParticleSystem lMissileMuzzleFlash;
     [SerializeField] ParticleSystem rMissileMuzzleFlash;
-
+    // Flamethrower
+    [SerializeField] GameObject flamethrower;
     public enum currentSelect
     { 
         LShoulder,
@@ -47,6 +48,7 @@ public class MechControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        flamethrower.SetActive(false);
     }
 
     void Update()
@@ -118,6 +120,7 @@ public class MechControl : MonoBehaviour
                     }
                     break;
                 case currentSelect.LArm:
+                    FlamethrowerUse();
                     break;
                 case currentSelect.RArm:
                     if (Time.time >= mgNextTimeToFire)
@@ -129,6 +132,10 @@ public class MechControl : MonoBehaviour
                 default:
                     break;
             }
+        }
+        else
+        {
+            flamethrower.SetActive(false);
         }
     }
 
@@ -172,6 +179,10 @@ public class MechControl : MonoBehaviour
         var position = spawner.position + spawner.forward;
         var rotation = spawner.rotation;
         KablooeyScript projectile = Instantiate(missile, position, rotation);
+    }
+    private void FlamethrowerUse()
+    {
+        flamethrower.SetActive(true);
     }
 
     #region InputAction Enables and Disables
