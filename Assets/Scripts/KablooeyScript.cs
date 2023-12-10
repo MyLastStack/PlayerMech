@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.HID;
 public class KablooeyScript : MonoBehaviour
 {
     private bool explode = false;
+    private bool alreadyExploded = false;
     private float dmg = 25f;
 
     private Vector3 lastHitPlaced;
@@ -17,16 +18,17 @@ public class KablooeyScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        rb.velocity = transform.forward * 1000f;
+        rb.velocity = transform.forward * 50f;
 
         Invoke("ForcedExplosion", 10f);
     }
 
     void Update()
     {
-        if (explode)
+        if (explode && !alreadyExploded)
         {
             GameObject impactGO = Instantiate(explosionEffect, lastHitPlaced, Quaternion.LookRotation(lastHitPlaced));
+            alreadyExploded = true;
             Destroy(gameObject, 2f);
         }
     }

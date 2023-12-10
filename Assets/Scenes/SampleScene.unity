@@ -8707,7 +8707,7 @@ MonoBehaviour:
     m_Flags: 0
   fpsCam: {fileID: 963194227}
   mgMuzzleFlash: {fileID: 98258330}
-  gunImpactEffect: {fileID: 0}
+  gunImpactEffect: {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
   lSide: {fileID: 407789458}
   rSide: {fileID: 870889382}
   missile: {fileID: 9107494967505168021, guid: d3d5ea6464d5ccb42b9f095c59531ce8, type: 3}
