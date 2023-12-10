@@ -15,10 +15,6 @@ public class MechControl : MonoBehaviour
     [SerializeField] AudioSource wheelTracks;
 
     [Header("Weapon Selection")]
-    [SerializeField] bool LShoulderUsed;
-    [SerializeField] bool RShoulderUsed;
-    [SerializeField] bool LArmUsed;
-    [SerializeField] bool RArmUsed;
     public enum currentSelect
     { 
         LShoulder,
