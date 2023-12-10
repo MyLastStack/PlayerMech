@@ -16,11 +16,20 @@ public class MechControl : MonoBehaviour
 
     [Header("Weapons")]
     public InputAction firingAction;
+    // Machine Gun
     public Camera fpsCam;
     [SerializeField] ParticleSystem mgMuzzleFlash;
-    public GameObject impactEffect;
-    private float nextTimeToFire = 0f;
-    private float fireRate = 15f;
+    public GameObject gunImpactEffect;
+    private float mgNextTimeToFire = 0f;
+    private float mgFireRate = 15f;
+    // Missile
+    public Transform lSide;
+    public Transform rSide;
+    private float missileProjectileSpeed = 100f;
+    private float missileNextTimeToFire = 0f;
+    private float missileFireRate = 3f;
+    [SerializeField] private KablooeyScript missile;
+
     public enum currentSelect
     { 
         LShoulder,
@@ -29,6 +38,7 @@ public class MechControl : MonoBehaviour
         RArm
     }
     public currentSelect selectedWeapon = currentSelect.RArm;
+    private int lor = 1;
 
     Rigidbody rb;
 
@@ -71,10 +81,12 @@ public class MechControl : MonoBehaviour
         if (Input.GetKeyDown("1"))
         {
             selectedWeapon = currentSelect.LShoulder;
+            lor = 1;
         }
         else if (Input.GetKeyDown("2"))
         {
             selectedWeapon = currentSelect.RShoulder;
+            lor = 2;
         }
         else if (Input.GetKeyDown("3"))
         {
@@ -90,15 +102,25 @@ public class MechControl : MonoBehaviour
             switch (selectedWeapon)
             {
                 case currentSelect.LShoulder:
+                    if (Time.time >= missileNextTimeToFire)
+                    {
+                        missileNextTimeToFire = Time.time + 1 / missileFireRate;
+                        MissileShoot(lor);
+                    }
                     break;
                 case currentSelect.RShoulder:
+                    if (Time.time >= missileNextTimeToFire)
+                    {
+                        missileNextTimeToFire = Time.time + 1 / missileFireRate;
+                        MissileShoot(lor);
+                    }
                     break;
                 case currentSelect.LArm:
                     break;
                 case currentSelect.RArm:
-                    if (Time.time >= nextTimeToFire)
+                    if (Time.time >= mgNextTimeToFire)
                     {
-                        nextTimeToFire = Time.time + 1 / fireRate;
+                        mgNextTimeToFire = Time.time + 1 / mgFireRate;
                         MGShoot();
                     }
                     break;
@@ -127,9 +149,26 @@ public class MechControl : MonoBehaviour
                 hit.rigidbody.AddForce(-hit.normal * 30);
             }
 
-            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            GameObject impactGO = Instantiate(gunImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 1f);
         }
+    }
+    private void MissileShoot(int side)
+    {
+        Transform spawner = gameObject.transform;
+        if (side == 1)
+        {
+            spawner = lSide.transform;
+        }
+        else if (side == 2)
+        {
+            spawner = rSide.transform;
+        }
+
+        var position = spawner.position + spawner.forward;
+        var rotation = spawner.rotation;
+        KablooeyScript projectile = Instantiate(missile, position, rotation);
+        projectile.Fire(missileProjectileSpeed, spawner.forward);
     }
 
     #region InputAction Enables and Disables

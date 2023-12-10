@@ -29,6 +29,11 @@ public class KablooeyScript : MonoBehaviour
         }
     }
 
+    public void Fire(float speed, Vector3 direction)
+    {
+        rb.velocity = direction * speed;
+    }
+
     void ForcedExplosion()
     {
         rb.velocity = Vector3.zero;
