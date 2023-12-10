@@ -16,6 +16,7 @@ public class MechControl : MonoBehaviour
 
     [Header("Weapons")]
     public InputAction firingAction;
+    public Camera fpsCam;
     public enum currentSelect
     { 
         LShoulder,
@@ -35,7 +36,7 @@ public class MechControl : MonoBehaviour
     void Update()
     {
         MechMovement();
-        WeaponSelecting();
+        WeaponInteraction();
     }
 
     private void FixedUpdate()
@@ -61,7 +62,7 @@ public class MechControl : MonoBehaviour
         }
     }
 
-    private void WeaponSelecting()
+    private void WeaponInteraction()
     {
         if (Input.GetKeyDown("1"))
         {
@@ -79,6 +80,29 @@ public class MechControl : MonoBehaviour
         {
             selectedWeapon = currentSelect.RArm;
         }
+
+        if (firingAction.triggered)
+        {
+            switch (selectedWeapon)
+            {
+                case currentSelect.LShoulder:
+                    break;
+                case currentSelect.RShoulder:
+                    break;
+                case currentSelect.LArm:
+                    break;
+                case currentSelect.RArm:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void MGShoot()
+    {
+        RaycastHit hit;
+
     }
 
     #region InputAction Enables and Disables
