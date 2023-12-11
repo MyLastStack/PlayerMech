@@ -8,6 +8,7 @@ public class HPCanvasScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI text;
     DamageableScript damageableScript;
 
+    [SerializeField] Transform station;
     [SerializeField] Transform playCam;
 
     void Start()
@@ -18,6 +19,6 @@ public class HPCanvasScript : MonoBehaviour
     void Update()
     {
         text.text = damageableScript.health.ToString();
-        transform.LookAt(playCam);
+        station.LookAt(playCam);
     }
 }
