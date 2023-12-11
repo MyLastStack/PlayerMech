@@ -12,7 +12,7 @@ public class CameraScript : MonoBehaviour
 
     [SerializeField] MechHealth mcTriggers;
     [SerializeField] GameCheck gameTrigger;
-
+    [SerializeField] PauseMenu pauseMenu;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -32,7 +32,7 @@ public class CameraScript : MonoBehaviour
         shoulders.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-        if (mcTriggers.missionFailUI || gameTrigger.missionSuccessUI)
+        if (mcTriggers.missionFailUI || gameTrigger.missionSuccessUI || pauseMenu.isPaused)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

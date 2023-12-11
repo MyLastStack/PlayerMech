@@ -10,6 +10,7 @@ public class GameCheck : MonoBehaviour
     public int enemyCount;
     void Start()
     {
+        Time.timeScale = 1.0f;
         missionSuccess.SetActive(false);
     }
 
