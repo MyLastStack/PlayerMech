@@ -22526,6 +22526,7 @@ MonoBehaviour:
   shoulders: {fileID: 1623208033}
   mcTriggers: {fileID: 1481645971}
   gameTrigger: {fileID: 1575345401}
+  pauseMenu: {fileID: 1575345402}
 --- !u!1 &964340304
 GameObject:
   m_ObjectHideFlags: 0
@@ -28751,6 +28752,7 @@ MonoBehaviour:
       m_Action: Pause
       m_Flags: 0
     m_Flags: 0
+  isPaused: 0
   pauseMenuUI: {fileID: 1175671736}
   gameCheck: {fileID: 1575345401}
   playerTrigger: {fileID: 1481645971}
