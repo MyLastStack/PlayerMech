@@ -50,11 +50,15 @@ public class KablooeyScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DamageableScript target = other.GetComponent<DamageableScript>();
-        if (target != null && explode)
+        DamageableScript target = other.gameObject.GetComponent<DamageableScript>();
+        if (target != null)
         {
-            target.TakeDamage(dmg);
-            impactSound.Play();
+            Debug.Log("Found");
+            if (alreadyExploded)
+            {
+                target.TakeDamage(dmg);
+                impactSound.Play();
+            }
         }
     }
 }

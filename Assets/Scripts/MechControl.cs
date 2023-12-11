@@ -159,7 +159,7 @@ public class MechControl : MonoBehaviour
     {
         mgMuzzleFlash.Play();
         mgShots.Play();
-        float dmg = 5f;
+        float dmg = 1f;
         machineGunAmmo--;
 
         RaycastHit hit;

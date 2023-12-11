@@ -6,6 +6,8 @@ public class DamageableScript : MonoBehaviour
 {
     public float health = 50f;
 
+    [SerializeField] GameObject destructible;
+
     public void TakeDamage(float amount)
     {
         health -= amount;
@@ -17,6 +19,10 @@ public class DamageableScript : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        if (destructible != null)
+        {
+            Instantiate(destructible, transform.position, transform.rotation);
+        }
     }
 }

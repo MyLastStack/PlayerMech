@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.HID;
 
 public class FlamethrowerScript : MonoBehaviour
 {
-    private float dmg = 10f;
+    private float dmg = 3f;
     [SerializeField] AudioSource flamethrower;
     void Start()
     {
@@ -17,9 +17,9 @@ public class FlamethrowerScript : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        DamageableScript target = other.transform.GetComponent<DamageableScript>();
+        DamageableScript target = other.gameObject.GetComponent<DamageableScript>();
         if (target != null)
         {
             target.TakeDamage(dmg);
