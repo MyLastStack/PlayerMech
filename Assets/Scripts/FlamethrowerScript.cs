@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.HID;
 
 public class FlamethrowerScript : MonoBehaviour
 {
-    private int dmg = 3;
+    private int dmg = 10;
     [SerializeField] AudioSource flamethrower;
     void Start()
     {

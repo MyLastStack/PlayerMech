@@ -9,6 +9,7 @@ TagManager:
   - CannonBox
   - MGBox
   - FTBox
+  - Enemy
   layers:
   - Default
   - TransparentFX
