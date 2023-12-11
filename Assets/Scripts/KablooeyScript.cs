@@ -11,6 +11,7 @@ public class KablooeyScript : MonoBehaviour
 
     private Vector3 lastHitPlaced;
     public GameObject explosionEffect;
+    [SerializeField] AudioSource impactSound;
 
     Rigidbody rb;
 
@@ -53,6 +54,7 @@ public class KablooeyScript : MonoBehaviour
         if (target != null && explode)
         {
             target.TakeDamage(dmg);
+            impactSound.Play();
         }
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Pickup
   - FxTemporaire
+  - CannonBox
+  - MGBox
+  - FTBox
   layers:
   - Default
   - TransparentFX

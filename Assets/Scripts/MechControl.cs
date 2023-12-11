@@ -13,6 +13,9 @@ public class MechControl : MonoBehaviour
 
     [Header("Audio Player")]
     [SerializeField] AudioSource wheelTracks;
+    [SerializeField] AudioSource mgShots;
+    [SerializeField] AudioSource cannonFireL;
+    [SerializeField] AudioSource cannonFireR;
 
     [Header("Weapons")]
     public InputAction firingAction;
@@ -42,6 +45,12 @@ public class MechControl : MonoBehaviour
     }
     public currentSelect selectedWeapon = currentSelect.RArm;
     private int lor = 1;
+
+    [Header("Weapon Data")]
+    public int machineGunAmmo;
+    public int leftCannonAmmo;
+    public int rightCannonAmmo;
+    public int flameThrowerAmmo;
 
     Rigidbody rb;
 
@@ -106,24 +115,31 @@ public class MechControl : MonoBehaviour
             switch (selectedWeapon)
             {
                 case currentSelect.LShoulder:
-                    if (Time.time >= missileNextTimeToFire)
+                    if (Time.time >= missileNextTimeToFire && leftCannonAmmo > 0)
                     {
                         missileNextTimeToFire = Time.time + 1 / missileFireRate;
                         MissileShoot(lor);
                     }
                     break;
                 case currentSelect.RShoulder:
-                    if (Time.time >= missileNextTimeToFire)
+                    if (Time.time >= missileNextTimeToFire && rightCannonAmmo > 0)
                     {
                         missileNextTimeToFire = Time.time + 1 / missileFireRate;
                         MissileShoot(lor);
                     }
                     break;
                 case currentSelect.LArm:
-                    FlamethrowerUse();
+                    if (flameThrowerAmmo > 0)
+                    {
+                        FlamethrowerUse();
+                    }
+                    else
+                    {
+                        flamethrower.SetActive(false);
+                    }
                     break;
                 case currentSelect.RArm:
-                    if (Time.time >= mgNextTimeToFire)
+                    if (Time.time >= mgNextTimeToFire && machineGunAmmo > 0)
                     {
                         mgNextTimeToFire = Time.time + 1 / mgFireRate;
                         MGShoot();
@@ -142,7 +158,9 @@ public class MechControl : MonoBehaviour
     private void MGShoot()
     {
         mgMuzzleFlash.Play();
-        float dmg = 10f;
+        mgShots.Play();
+        float dmg = 5f;
+        machineGunAmmo--;
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 50f))
@@ -169,11 +187,13 @@ public class MechControl : MonoBehaviour
         {
             spawner = lSide.transform;
             lMissileMuzzleFlash.Play();
+            leftCannonAmmo--;
         }
         else if (side == 2)
         {
             spawner = rSide.transform;
             rMissileMuzzleFlash.Play();
+            rightCannonAmmo--;
         }
 
         var position = spawner.position + spawner.forward;
@@ -183,6 +203,24 @@ public class MechControl : MonoBehaviour
     private void FlamethrowerUse()
     {
         flamethrower.SetActive(true);
+        flameThrowerAmmo--;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "MGBox")
+        {
+            machineGunAmmo = 200;
+        }
+        if (other.tag == "CannonBox")
+        {
+            leftCannonAmmo = 10;
+            rightCannonAmmo = 10;
+        }
+        if (other.tag == "FTBox")
+        {
+            flameThrowerAmmo = 1000;
+        }
     }
 
     #region InputAction Enables and Disables
