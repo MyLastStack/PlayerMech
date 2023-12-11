@@ -9,6 +9,7 @@ public class MechHealth : MonoBehaviour
     int healthPoints = 50;
 
     [SerializeField] GameObject missionFail;
+    public bool missionFailUI = false;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class MechHealth : MonoBehaviour
             if (missionFail != null)
             {
                 missionFail.SetActive(true);
+                missionFailUI = true;
             }
 
         }

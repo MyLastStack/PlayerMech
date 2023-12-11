@@ -10,6 +10,8 @@ public class CameraScript : MonoBehaviour
 
     float xRotation, yRotation;
 
+    [SerializeField] MechHealth mcTriggers;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -28,5 +30,11 @@ public class CameraScript : MonoBehaviour
 
         shoulders.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        if (mcTriggers.missionFailUI)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
