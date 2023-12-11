@@ -19472,7 +19472,7 @@ MonoBehaviour:
   machineGunAmmo: 200
   leftCannonAmmo: 10
   rightCannonAmmo: 10
-  flameThrowerAmmo: 1000
+  flameThrowerAmmo: 2000
 --- !u!54 &1481645970
 Rigidbody:
   m_ObjectHideFlags: 0

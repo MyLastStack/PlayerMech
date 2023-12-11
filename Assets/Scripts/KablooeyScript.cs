@@ -7,7 +7,7 @@ public class KablooeyScript : MonoBehaviour
 {
     private bool explode = false;
     private bool alreadyExploded = false;
-    private float dmg = 25f;
+    private float dmg = 30f;
 
     private Vector3 lastHitPlaced;
     public GameObject explosionEffect;

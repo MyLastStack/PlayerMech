@@ -219,7 +219,7 @@ public class MechControl : MonoBehaviour
         }
         if (other.tag == "FTBox")
         {
-            flameThrowerAmmo = 1000;
+            flameThrowerAmmo = 2000;
         }
     }
 
