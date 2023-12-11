@@ -159,11 +159,11 @@ public class MechControl : MonoBehaviour
     {
         mgMuzzleFlash.Play();
         mgShots.Play();
-        float dmg = 1f;
+        int dmg = 1;
         machineGunAmmo--;
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 50f))
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 100f))
         {
             DamageableScript target = hit.transform.GetComponent<DamageableScript>();
             if (target != null)

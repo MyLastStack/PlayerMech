@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DamageableScript : MonoBehaviour
 {
-    public float health = 50f;
+    public int health = 50;
 
     [SerializeField] GameObject destructible;
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         health -= amount;
         if (health <= 0)

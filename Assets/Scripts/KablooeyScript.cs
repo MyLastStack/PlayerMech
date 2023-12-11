@@ -7,11 +7,12 @@ public class KablooeyScript : MonoBehaviour
 {
     private bool explode = false;
     private bool alreadyExploded = false;
-    private float dmg = 30f;
+    private int dmg = 30;
 
     private Vector3 lastHitPlaced;
     public GameObject explosionEffect;
     [SerializeField] AudioSource impactSound;
+    bool alreadyImpacted = false;
 
     Rigidbody rb;
 
@@ -48,15 +49,29 @@ public class KablooeyScript : MonoBehaviour
         explode = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    DamageableScript target = other.gameObject.GetComponent<DamageableScript>();
+    //    if (target != null)
+    //    {
+    //        Debug.Log("Found");
+    //        if (alreadyExploded)
+    //        {
+    //            target.TakeDamage(dmg);
+    //            impactSound.Play();
+    //        }
+    //    }
+    //}
+
+    private void OnTriggerStay(Collider other)
     {
         DamageableScript target = other.gameObject.GetComponent<DamageableScript>();
         if (target != null)
         {
-            Debug.Log("Found");
-            if (alreadyExploded)
+            if (alreadyExploded && !alreadyImpacted)
             {
                 target.TakeDamage(dmg);
+                alreadyImpacted = true;
                 impactSound.Play();
             }
         }
